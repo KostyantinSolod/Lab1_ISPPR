@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages:['wordtree']});
+        google.charts.setOnLoadCallback(drawSoftwareChart);
+        google.charts.setOnLoadCallback(drawSemanticAnalysis);
+        google.charts.setOnLoadCallback(drawSimpleNodeChart);
+        function drawSimpleNodeChart() {
+
+        var data = google.visualization.arrayToDataTable(
+          [ [`Phrases`],
+        ['"Two hundred years ago, our forefathers gathered here, on this continent, to establish a new nation, founded on the principles of freedom and equality for all. Today, we find ourselves in the midst of a great struggle, testing whether this nation, or any nation built upon these ideals, can endure through the challenges ahead. We stand on this hallowed ground, where brave souls gave their lives so that this nation could continue to thrive. It is our duty to honor them, not only by dedicating this ground to their memory, but by ensuring their sacrifice was not in vain. The task before us is clear: to ensure that the freedom they fought for remains secure, that this nation, under God, is reborn in liberty, and that government, by the people, for the people, endures. As we reflect on their bravery, we are reminded that it is not enough to simply speak of their heroism – we must live by their example, striving to uphold the cause they championed."']
+                  ]
+        );
+        var options = {
+          wordtree: {
+            format: `implicit`,
+            type: `double`,
+            word: `nation`
+          }
+        };
+        var wordtree = new
+google.visualization.WordTree(document.getElementById(`wordtree_double`));
+        wordtree.draw(data, options);
+      }
+        // Семантична мережа програмного забезпечення факультету
+        function drawSoftwareChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Phrases'],
+            ['Факультет використовує Програмне забезпечення'],
+            ['Факультет використовує MATLAB'],
+            ['Факультет використовує Python'],
+            ['Факультет використовує Java'],
+            ['Факультет застосовує MATLAB у курсі Обчислювальна математика'],
+            ['Факультет застосовує MATLAB у курсі Сигнальна обробка'],
+            ['Факультет застосовує Python у курсі Машинне навчання'],
+            ['Факультет застосовує Python у курсі Веб-розробка'],
+            ['Факультет застосовує Java у курсі Розробка мобільних додатків'],
+            ['Факультет застосовує Java у курсі Об’єктно-орієнтоване програмування']
+        ]);
+
+            var options = {
+                wordtree: {
+                    format: 'implicit',
+                    word: 'Факультет'
+                }
+            };
+
+            var chart = new google.visualization.WordTree(document.getElementById('wordtree'));
+            chart.draw(data, options);
+        }
+
+        // Семантичний аналіз тексту
+        function drawSemanticAnalysis() {
+            var data = google.visualization.arrayToDataTable([
+                ['Phrases'],
+                ['TikTok Це популярна соціальна медійна платформа'],
+                ['TikTok має багато творців контенту'],
+                ["TikTok використовує алгоритм для показу відео"],
+                ['PHP — мова сценаріїв для веб-розробки'],
+                ['PHP підтримує багато веб-сайтів'],
+                ['PHP використовується для розробки серверної частини'],
+                ['Інфлюенсери TikTok заробляють гроші'],
+                ['PHP підтримує такі бази даних, як MySQL'],
+                ['Тенденції TikTok швидко змінюються'],
+                ['PHP використовується на платформах CMS, таких як WordPress']
+            ]);
+
+            var options = {
+                wordtree: {
+                    format: 'implicit',
+                    word: 'PHP'
+                }
+            };
+
+            var chart = new google.visualization.WordTree(document.getElementById('analysis_wordtree'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <h2>Семантична мережа програмного забезпечення факультету</h2>
+    <div id="wordtree" style="width: 1250px; height: 500px;"></div>
+
+    <h2>Семантичний аналіз тексту (TikTok, PHP)</h2>
+    <div id="analysis_wordtree" style="width: 1050px; height: 500px;"></div>
+
+    <h2 style="width: 2700px; font-size: 36px; text-align: center;">Аналіз тексту</h2>
+    <div id="wordtree_double" style="width: 2700px; height: 500px;"></div>
+</body>
+</html>
