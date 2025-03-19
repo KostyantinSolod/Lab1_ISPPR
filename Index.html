@@ -1,95 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {packages:['wordtree']});
-        google.charts.setOnLoadCallback(drawSoftwareChart);
-        google.charts.setOnLoadCallback(drawSemanticAnalysis);
-        google.charts.setOnLoadCallback(drawSimpleNodeChart);
-        function drawSimpleNodeChart() {
-
-        var data = google.visualization.arrayToDataTable(
-          [ [`Phrases`],
-        ['"Two hundred years ago, our forefathers gathered here, on this continent, to establish a new nation, founded on the principles of freedom and equality for all. Today, we find ourselves in the midst of a great struggle, testing whether this nation, or any nation built upon these ideals, can endure through the challenges ahead. We stand on this hallowed ground, where brave souls gave their lives so that this nation could continue to thrive. It is our duty to honor them, not only by dedicating this ground to their memory, but by ensuring their sacrifice was not in vain. The task before us is clear: to ensure that the freedom they fought for remains secure, that this nation, under God, is reborn in liberty, and that government, by the people, for the people, endures. As we reflect on their bravery, we are reminded that it is not enough to simply speak of their heroism – we must live by their example, striving to uphold the cause they championed."']
-                  ]
-        );
-        var options = {
-          wordtree: {
-            format: `implicit`,
-            type: `double`,
-            word: `nation`
-          }
-        };
-        var wordtree = new
-google.visualization.WordTree(document.getElementById(`wordtree_double`));
-        wordtree.draw(data, options);
-      }
-        // Семантична мережа програмного забезпечення факультету
-        function drawSoftwareChart() {
-            var data = google.visualization.arrayToDataTable([
-            ['Phrases'],
-            ['Факультет використовує Програмне забезпечення'],
-            ['Факультет використовує MATLAB'],
-            ['Факультет використовує Python'],
-            ['Факультет використовує Java'],
-            ['Факультет застосовує MATLAB у курсі Обчислювальна математика'],
-            ['Факультет застосовує MATLAB у курсі Сигнальна обробка'],
-            ['Факультет застосовує Python у курсі Машинне навчання'],
-            ['Факультет застосовує Python у курсі Веб-розробка'],
-            ['Факультет застосовує Java у курсі Розробка мобільних додатків'],
-            ['Факультет застосовує Java у курсі Об’єктно-орієнтоване програмування']
-        ]);
-
-            var options = {
-                wordtree: {
-                    format: 'implicit',
-                    word: 'Факультет'
-                }
-            };
-
-            var chart = new google.visualization.WordTree(document.getElementById('wordtree'));
-            chart.draw(data, options);
-        }
-
-        // Семантичний аналіз тексту
-        function drawSemanticAnalysis() {
-            var data = google.visualization.arrayToDataTable([
-                ['Phrases'],
-                ['TikTok Це популярна соціальна медійна платформа'],
-                ['TikTok має багато творців контенту'],
-                ["TikTok використовує алгоритм для показу відео"],
-                ['PHP — мова сценаріїв для веб-розробки'],
-                ['PHP підтримує багато веб-сайтів'],
-                ['PHP використовується для розробки серверної частини'],
-                ['Інфлюенсери TikTok заробляють гроші'],
-                ['PHP підтримує такі бази даних, як MySQL'],
-                ['Тенденції TikTok швидко змінюються'],
-                ['PHP використовується на платформах CMS, таких як WordPress']
-            ]);
-
-            var options = {
-                wordtree: {
-                    format: 'implicit',
-                    word: 'PHP'
-                }
-            };
-
-            var chart = new google.visualization.WordTree(document.getElementById('analysis_wordtree'));
-            chart.draw(data, options);
-        }
-    </script>
+    <title>Кластерний аналіз</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { border-collapse: collapse; margin: 20px auto; }
+        th, td { border: 1px solid black; padding: 5px; text-align: center; }
+        input { width: 50px; text-align: center; }
+        button { margin: 10px; padding: 10px; cursor: pointer; }
+        .steps { text-align: left; margin: 20px auto; max-width: 600px; }
+    </style>
 </head>
 <body>
-    <h2>Семантична мережа програмного забезпечення факультету</h2>
-    <div id="wordtree" style="width: 1250px; height: 500px;"></div>
-
-    <h2>Семантичний аналіз тексту (TikTok, PHP)</h2>
-    <div id="analysis_wordtree" style="width: 1050px; height: 500px;"></div>
-
-    <h2 style="width: 2700px; font-size: 36px; text-align: center;">Аналіз тексту</h2>
-    <div id="wordtree_double" style="width: 2700px; height: 500px;"></div>
+    <h1>Кластерний аналіз</h1>
+    <table id="dataTable">
+        <tr>
+            <th>Пацієнти</th>
+            <th>Х1</th>
+            <th>Х2</th>
+            <th>Х3</th>
+            <th>Х4</th>
+            <th>Х5</th>
+        </tr>
+        <tr><td>Р1</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+        <tr><td>Р2</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+        <tr><td>Р3</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+        <tr><td>Р4</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+        <tr><td>Р5</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+        <tr><td>Р6</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+        <tr><td>Р7</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+    </table>
+    <button onclick="calculateClusters()">Обчислити кластери</button>
+    <h2>Результати:</h2>
+    <p id="result"></p>
+    <div class="steps" id="steps"></div>
+    
+    <script>
+        function calculateClusters() {
+            let table = document.getElementById("dataTable");
+            let steps = document.getElementById("steps");
+            steps.innerHTML = "<h2>Покрокове розв'язування:</h2>";
+            let data = [];
+            
+            for (let i = 1; i < table.rows.length; i++) {
+                let row = [];
+                for (let j = 1; j < table.rows[i].cells.length; j++) {
+                    let value = parseFloat(table.rows[i].cells[j].children[0].value);
+                    if (isNaN(value)) {
+                        document.getElementById("result").innerText = "Будь ласка, введіть всі значення!";
+                        return;
+                    }
+                    row.push(value);
+                }
+                data.push(row);
+            }
+            
+            steps.innerHTML += "<p><b>Вхідні дані:</b> " + JSON.stringify(data) + "</p>";
+            
+            let sums = data.reduce((acc, row) => row.map((val, i) => (acc[i] || 0) + val), []);
+            steps.innerHTML += "<p><b>Сума по кожному параметру:</b> " + JSON.stringify(sums) + "</p>";
+            
+            let normalized = data.map(row => row.map((val, i) => val / sums[i]));
+            steps.innerHTML += "<p><b>Нормалізовані значення:</b> " + JSON.stringify(normalized.map(row => row.map(v => v.toFixed(6)))) + "</p>";
+            
+            let distances = Array(data.length).fill().map(() => Array(data.length).fill(0));
+            
+            for (let i = 0; i < data.length; i++) {
+                for (let j = i + 1; j < data.length; j++) {
+                    distances[i][j] = distances[j][i] = Math.sqrt(
+                        normalized[i].reduce((sum, val, k) => sum + Math.pow(val - normalized[j][k], 2), 0)
+                    ).toFixed(6);
+                }
+            }
+            
+            steps.innerHTML += "<p><b>Матриця відстаней:</b> " + JSON.stringify(distances) + "</p>";
+            
+            let minDistances = distances.map(row => Math.min(...row.filter(v => v > 0)));
+            let threshold = Math.max(...minDistances).toFixed(6);
+            steps.innerHTML += "<p><b>Критична відстань:</b> " + threshold + "</p>";
+            
+            let clusters = [];
+            let assigned = new Array(data.length).fill(false);
+            
+            for (let i = 0; i < data.length; i++) {
+                if (!assigned[i]) {
+                    let cluster = [i + 1];
+                    assigned[i] = true;
+                    for (let j = 0; j < data.length; j++) {
+                        if (!assigned[j] && distances[i][j] <= threshold) {
+                            cluster.push(j + 1);
+                            assigned[j] = true;
+                        }
+                    }
+                    clusters.push(cluster);
+                }
+            }
+            
+            steps.innerHTML += "<p><b>Фінальні кластери:</b> " + JSON.stringify(clusters) + "</p>";
+            document.getElementById("result").innerText = "Кластери: " + clusters.map(c => `{${c.join(', ')}}`).join(' ');
+        }
+    </script>
 </body>
 </html>
