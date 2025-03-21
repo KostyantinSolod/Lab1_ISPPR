@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.table-container {
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+    text-transform: uppercase;
+}
+
+input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px; /* Збільшений розмір шрифту для введення */
+}
+
+.result {
+    font-size: 18px;
+}
+
+/* Стилі для заголовка "Результати" */
+h2.results-title {
+    font-size: 24px; /* Збільшений розмір шрифту */
+    font-weight: bold; /* Жирний шрифт */
+    color: #333; /* Колір тексту */
+    margin-top: 20px; /* Відступ зверху */
+}
+
+/* Стилі для результатів Z1 та Z2 */
+#result {
+    font-size: 20px; /* Збільшений розмір шрифту */
+    font-weight: bold; /* Жирний шрифт */
+    color: #007BFF; /* Колір тексту (синій) */
+    margin-top: 10px; /* Відступ зверху */
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.error {
+    color: #d32f2f;
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.steps {
+    margin-top: 20px;
+}
+
+.step {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.step h3 {
+    margin-top: 0;
+    color: #007BFF;
+}
+
+.step pre {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+}
+
+/* Стилі для контейнера результатів */
+.results-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Стилі для заголовка "Результати" */
+.results-title {
+    font-size: 24px; /* Збільшений розмір шрифту */
+    font-weight: bold; /* Жирний шрифт */
+    color: #333; /* Колір тексту */
+    margin-bottom: 10px; /* Відступ знизу */
+}
+
+/* Стилі для тексту результатів */
+.result-text {
+    font-size: 20px; /* Збільшений розмір шрифту */
+    color: #007BFF; /* Колір тексту (синій) */
+    margin: 0; /* Видалення зовнішніх відступів */
+}
+
+/* Стилі для жирного тексту (класів Z1 та Z2) */
+.result-text strong {
+    color: #d32f2f; /* Червоний колір для класів */
+    font-weight: bold; /* Жирний шрифт */
+}
