@@ -22,7 +22,6 @@ const dataY = [
 const dataZ1 = [3.6, 62, 13, 0.45];
 const dataZ2 = [2.6, 49, 16, 0.41];
 
-// Функція для заповнення таблиць
 function fillTables() {
         fillTable('dataTableXij', dataX);
         fillTable('dataTableYij', dataY);
@@ -30,7 +29,6 @@ function fillTables() {
         fillTable('dataTableZtwo', [dataZ2]);
     }
 
-    // Функція для заповнення конкретної таблиці
     function fillTable(tableId, data) {
         const table = document.getElementById(tableId);
         const rows = table.querySelectorAll('tr');
@@ -42,7 +40,6 @@ function fillTables() {
         }
     }
 
-    // Інші функції залишаються незмінними
     function getDataFromTable(tableId) {
         const table = document.getElementById(tableId);
         const rows = table.querySelectorAll('tr');
@@ -149,12 +146,11 @@ function fillTables() {
 
     function calculateClusters() {
     try {
-        const steps = []; // Масив для зберігання кроків
+        const steps = [];
         const addStep = (title, content) => {
             steps.push({ title, content });
         };
 
-        // Отримання даних з таблиць
         const X = getDataFromTable('dataTableXij');
         const Y = getDataFromTable('dataTableYij');
         const Z1 = getDataFromTable('dataTableZone')[0];
@@ -165,26 +161,22 @@ function fillTables() {
         addStep("Вхідні дані Z1", Z1);
         addStep("Вхідні дані Z2", Z2);
 
-        // Перевірка на коректність вхідних даних
         if (!X.length || !Y.length || !Z1.length || !Z2.length) {
             throw new Error("Будь ласка, заповніть всі поля таблиць.");
         }
 
-        // Обчислення середніх значень
         const meanX = calculateMean(X);
         const meanY = calculateMean(Y);
 
         addStep("Середнє значення X", meanX);
         addStep("Середнє значення Y", meanY);
 
-        // Обчислення коваріаційних матриць
         const covX = calculateCovarianceMatrix(X, meanX);
         const covY = calculateCovarianceMatrix(Y, meanY);
 
         addStep("Коваріаційна матриця X", covX);
         addStep("Коваріаційна матриця Y", covY);
 
-        // Обчислення об'єднаної коваріаційної матриці
         const n1 = X.length;
         const n2 = Y.length;
         const S = multiplyMatrixByScalar(
@@ -194,50 +186,42 @@ function fillTables() {
 
         addStep("Об'єднана коваріаційна матриця S", S);
 
-        // Обчислення оберненої матриці S
         const S_inv = inverseMatrix(S);
 
         addStep("Обернена матриця S<sup>-1</sup>", S_inv);
 
-        // Обчислення вектора A
         const A = matrixMultiply(S_inv, subtractVectors(meanX, meanY));
 
         addStep("Вектор A", A);
 
-        // Обчислення проекцій Ux та Uy
         const Ux = X.map(row => dotProduct(row, A));
         const Uy = Y.map(row => dotProduct(row, A));
 
         addStep("Проекції Ux", Ux);
         addStep("Проекції Uy", Uy);
 
-        // Обчислення середніх значень Ux та Uy
         const meanUx = Ux.reduce((sum, val) => sum + val, 0) / n1;
         const meanUy = Uy.reduce((sum, val) => sum + val, 0) / n2;
 
         addStep("Середнє значення Ux", meanUx);
         addStep("Середнє значення Uy", meanUy);
 
-        // Обчислення порогового значення C
         const C = (meanUx + meanUy) / 2;
 
         addStep("Порогове значення C", C);
 
-        // Обчислення проекцій Uz1 та Uz2
         const Uz1 = dotProduct(Z1, A);
         const Uz2 = dotProduct(Z2, A);
 
         addStep("Проекція Uz1", Uz1);
         addStep("Проекція Uz2", Uz2);
 
-        // Визначення класу для Z1 та Z2
         const resultZ1 = Uz1 >= C ? 'X' : 'Y';
         const resultZ2 = Uz2 >= C ? 'X' : 'Y';
 
         addStep("Результат для Z1", `Z1 належить до класу: ${resultZ1}`);
         addStep("Результат для Z2", `Z2 належить до класу: ${resultZ2}`);
 
-        // Виведення результатів
         document.getElementById('result').innerHTML = `
         <div class="results-container">
             <h2 class="results-title">Результати:</h2>
@@ -248,15 +232,12 @@ function fillTables() {
         </div>
         `;
 
-        // Виведення кроків
         const stepsContainer = document.getElementById('steps');
         stepsContainer.innerHTML = steps.map((step, index) => {
             let contentHtml;
 
             if (Array.isArray(step.content)) {
-                // Якщо content — це масив (матриця або вектор)
                 if (step.content.every(row => Array.isArray(row))) {
-                    // Якщо це двовимірний масив (матриця)
                     contentHtml = `
                         <table>
                             ${step.content.map(row => `
@@ -267,7 +248,6 @@ function fillTables() {
                         </table>
                     `;
                 } else {
-                    // Якщо це одновимірний масив (вектор)
                     contentHtml = `
                         <table>
                             <tr>
@@ -277,10 +257,8 @@ function fillTables() {
                     `;
                 }
             } else if (typeof step.content === 'object' && step.content !== null) {
-                // Якщо content — це об'єкт (наприклад, JSON)
                 contentHtml = `<pre>${JSON.stringify(step.content, null, 2)}</pre>`;
             } else {
-                // Якщо content — це простий текст або число
                 contentHtml = `<p>${step.content}</p>`;
             }
 
